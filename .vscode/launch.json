@@ -1,0 +1,162 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Attach mm",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "${workspaceFolder}/run/mmmApp",
+            "processId": "${command:pickProcess}",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {   "description":"In this mode GDB will be attached to both processes after a call to fork() or vfork().",
+                    "text": "-gdb-set detach-on-fork off",
+                    "ignoreFailures": true
+                },
+                {   "description": "The new process is debugged after a fork. The parent process runs unimpeded.",
+                    "text": "-gdb-set follow-fork-mode child",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Attach test",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "${workspaceFolder}/build/test/httpstub-master/httpstub",
+            "processId": "${command:pickProcess}",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {   "description":"In this mode GDB will be attached to both processes after a call to fork() or vfork().",
+                    "text": "-gdb-set detach-on-fork off",
+                    "ignoreFailures": true
+                },
+                {   "description": "The new process is debugged after a fork. The parent process runs unimpeded.",
+                    "text": "-gdb-set follow-fork-mode child",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Launch mmRun",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/run/mmRun",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/run",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {   "description":"In this mode GDB will be attached to both processes after a call to fork() or vfork().",
+                    "text": "-gdb-set detach-on-fork off",
+                    "ignoreFailures": true
+                },
+                {   "description": "The new process is debugged after a fork. The parent process runs unimpeded.",
+                    "text": "-gdb-set follow-fork-mode child",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Launch mmmApp",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/run/mmmApp",
+            "args": ["config/mm.json"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/run",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {   "description":"In this mode GDB will be attached to both processes after a call to fork() or vfork().",
+                    "text": "-gdb-set detach-on-fork off",
+                    "ignoreFailures": true
+                },
+                {   "description": "The new process is debugged after a fork. The parent process runs unimpeded.",
+                    "text": "-gdb-set follow-fork-mode child",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Launch mmCmd",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/run/mmCmd",
+            "args": ["mq", "0", "0"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/run",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {   "description":"In this mode GDB will be attached to both processes after a call to fork() or vfork().",
+                    "text": "-gdb-set detach-on-fork off",
+                    "ignoreFailures": true
+                },
+                {   "description": "The new process is debugged after a fork. The parent process runs unimpeded.",
+                    "text": "-gdb-set follow-fork-mode child",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Launch test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/test/strcasestr",
+            "args": ["-p", "10004", "-f", "/home/pi/WorkSpace/mm/test/httpstub-master/README.md"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/test",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {   "description":"In this mode GDB will be attached to both processes after a call to fork() or vfork().",
+                    "text": "-gdb-set detach-on-fork off",
+                    "ignoreFailures": true
+                },
+                {   "description": "The new process is debugged after a fork. The parent process runs unimpeded.",
+                    "text": "-gdb-set follow-fork-mode child",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

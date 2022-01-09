@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.8)
+
+add_subdirectory(structure)
+add_subdirectory(json)
+add_subdirectory(FSM)
+add_subdirectory(log)
+add_subdirectory(thread)
+add_subdirectory(process)
+add_subdirectory(URL)
+add_subdirectory(base64)
+add_subdirectory(email)

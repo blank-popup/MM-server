@@ -1,0 +1,106 @@
+{
+    "wait_message": {
+        "help": {
+            "action": [
+                "plugin/so/libtestServer.so",
+                "help_start"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": "state_0",
+                "NAK": "state_final"
+            }
+        },
+        "basic": {
+            "action": [
+                "plugin/so/libtestServer.so",
+                "basic_start"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": "state_1",
+                "NAK": "state_final"
+            }
+        },
+        "req_plus_one": {
+            "action": [
+                "plugin/so/libtestServerWorker.so",
+                "server_send_req_plus_one"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": "state_final",
+                "NAK": "state_final"
+            }
+        },
+        "get_volume": {
+            "action": [
+                "plugin/so/libtestID.so",
+                "get_volume"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": "state_final",
+                "NAK": "state_final"
+            }
+        },
+        "execute_python": {
+            "action": [
+                "plugin/so/libtestPython.so",
+                "server_execute_python"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": "state_final",
+                "NAK": "state_final"
+            }
+        }
+    },
+    "state_0": {
+        "": {
+            "action": [
+                "plugin/so/libtestServer.so",
+                "state_0_default"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": "state_final",
+                "NAK": "state_final"
+            }
+        }
+    },
+    "state_1": {
+        "": {
+            "action": [
+                "plugin/so/libtestServer.so",
+                "state_1_default"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": "state_final",
+                "NAK": "state_final"
+            }
+        }
+    },
+    "state_final": {
+        "": {
+            "action": [
+                "plugin/so/libtestServer.so",
+                "state_final_default"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": null,
+                "NAK": null
+            }
+        }
+    }
+}

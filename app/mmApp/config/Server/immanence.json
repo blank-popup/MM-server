@@ -1,0 +1,28 @@
+{
+    "REST": {
+        "basic": {
+            "basic": {
+                "\/POST": "basic"
+            }
+        },
+        "send": {
+            "\/POST": "req_plus_one"
+        },
+        "id": {
+            "items": {
+                "\\": {
+                    "\\": {
+                        "size": {
+                            "\/GET": "get_volume"
+                        }
+                    }
+                },
+                "\/POST": "help"
+            }
+        },
+        "python": {
+            "\/POST": "execute_python"
+        },
+        "\/GET": "help"
+    }
+}

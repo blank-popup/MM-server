@@ -1,0 +1,382 @@
+{
+    "mm": {
+        "directory_root": "/home/nova/WorkSpace/MM-REST-server/run",
+        "filename_main": "mmmApp",
+        "directory_python": "/home/nova/miniforge3/envs/mm/bin",
+        "process_logger": "Logger"
+    },
+    "mmApps": {
+        "Logger": {
+            "name_process": [
+                "mmmLogger_00"
+            ],
+            "filepath_log": "config/Logger/logger.json",
+            "count_process": 1,
+            "initialize_sub_thread": [
+                "so/libsubThread.so",
+                "initialize_common_sub_thread"
+            ],
+            "sub_thread": [
+                {
+                    "sub_thread": [
+                        "so/libsubThread.so",
+                        "thread_Logger"
+                    ],
+                    "count_thread": 2,
+                    "filepath_fsm": "config/Logger/FSM.json"
+                }
+            ],
+            "main_thread": [
+                "so/libsubThread.so",
+                "main_thread_process"
+            ],
+            "return_app": [
+                "so/libsubThread.so",
+                "trace_return_app_nak"
+            ],
+            "return_so": [
+                "so/libsubThread.so",
+                "trace_return_so_nak"
+            ],
+            "timer": {
+                "period_work": 1000,
+                "count_wait_revive": 10,
+                "timeout_thread": 10000
+            },
+            "message_queue": {
+                "name": [
+                    "/mq_mmLogger_00"
+                ],
+                "maxmsg": 8,
+                "msgsize": 96
+            },
+            "shared_memory": {
+                "name_shm": [
+                    "/shm_mmLogger_00"
+                ],
+                "name_sem": [
+                    "/sem_mmLogger_00"
+                ]
+            },
+            "socket": {
+                "port": [
+                    0
+                ],
+                "backlog": 0,
+                "type_target": [
+                    ""
+                ]
+            },
+            "dsock_receive_fd": {
+                "path": [
+                    ""
+                ],
+                "backlog": 32
+            },
+            "domain_socket": {
+                "path": [
+                    ""
+                ],
+                "backlog": 32
+            },
+            "named_pipe": {
+                "path": [
+                    "ipc/np_mmLogger_00"
+                ]
+            }
+        },
+        "Dispatcher": {
+            "name_process": [
+                "mmmDispatcher_00"
+            ],
+            "filepath_log": "config/Dispatcher/logger.json",
+            "count_process": 1,
+            "initialize_sub_thread": [
+                "so/libsubThread.so",
+                "initialize_common_sub_thread"
+            ],
+            "sub_thread": [
+                {
+                    "sub_thread": [
+                        "so/libsubThread.so",
+                        "thread_Dispatcher"
+                    ],
+                    "count_thread": 8,
+                    "filepath_fsm": "config/Dispatcher/FSM.json"
+                }
+            ],
+            "main_thread": [
+                "so/libsubThread.so",
+                "main_thread_process"
+            ],
+            "return_app": [
+                "so/libsubThread.so",
+                "trace_return_app_nak"
+            ],
+            "return_so": [
+                "so/libsubThread.so",
+                "trace_return_so_nak"
+            ],
+            "timer": {
+                "period_work": 1000,
+                "count_wait_revive": 10,
+                "timeout_thread": 10000
+            },
+            "message_queue": {
+                "name": [
+                    "/mq_mmDispatcher_00"
+                ],
+                "maxmsg": 8,
+                "msgsize": 96
+            },
+            "shared_memory": {
+                "name_shm": [
+                    "/shm_mmDispatcher_00"
+                ],
+                "name_sem": [
+                    "/sem_mmDispatcher_00"
+                ]
+            },
+            "socket": {
+                "port": [
+                    10004
+                ],
+                "backlog": 32,
+                "type_target": [
+                    "Server"
+                ]
+            },
+            "dsock_receive_fd": {
+                "path": [
+                    ""
+                ],
+                "backlog": 32
+            },
+            "domain_socket": {
+                "path": [
+                    ""
+                ],
+                "backlog": 32
+            },
+            "named_pipe": {
+                "path": [
+                    "ipc/np_mmDispatcher_00"
+                ]
+            }
+        },
+        "Server": {
+            "name_process": [
+                "mmmServer_00",
+                "mmmServer_01",
+                "mmmServer_02"
+            ],
+            "filepath_log": "config/Server/logger.json",
+            "count_process": 3,
+            "initialize_sub_thread": [
+                "so/libsubThread.so",
+                "initialize_server_sub_thread"
+            ],
+            "sub_thread": [
+                {
+                    "sub_thread": [
+                        "so/libsubThread.so",
+                        "thread_Server"
+                    ],
+                    "count_thread": 8,
+                    "filepath_fsm": "config/Server/FSM.json"
+                }
+            ],
+            "main_thread": [
+                "so/libsubThread.so",
+                "main_thread_process"
+            ],
+            "return_app": [
+                "so/libsubThread.so",
+                "trace_return_app_nak"
+            ],
+            "return_so": [
+                "so/libsubThread.so",
+                "trace_return_so_nak"
+            ],
+            "timer": {
+                "period_work": 1000,
+                "count_wait_revive": 10,
+                "timeout_thread": 10000
+            },
+            "message_queue": {
+                "name": [
+                    "/mq_mmServer_00",
+                    "/mq_mmServer_01",
+                    "/mq_mmServer_02"
+                ],
+                "maxmsg": 8,
+                "msgsize": 96
+            },
+            "shared_memory": {
+                "name_shm": [
+                    "/shm_mmServer_00",
+                    "/shm_mmServer_01",
+                    "/shm_mmServer_02"
+                ],
+                "name_sem": [
+                    "/sem_mmServer_00",
+                    "/sem_mmServer_01",
+                    "/sem_mmServer_02"
+                ]
+            },
+            "socket": {
+                "port": [
+                    0,
+                    0,
+                    0
+                ],
+                "backlog": 0,
+                "type_target": [
+                    "Worker",
+                    "Worker",
+                    "Worker"
+                ]
+            },
+            "dsock_receive_fd": {
+                "path": [
+                    "ipc/rf_mmServer_00",
+                    "ipc/rf_mmServer_01",
+                    "ipc/rf_mmServer_02"
+                ],
+                "backlog": 32
+            },
+            "domain_socket": {
+                "path": [
+                    "",
+                    ""
+                ],
+                "backlog": 32
+            },
+            "named_pipe": {
+                "path": [
+                    "ipc/np_mmServerger_00",
+                    "ipc/np_mmServerger_01",
+                    "ipc/np_mmServerger_02"
+                ]
+            }
+        },
+        "Worker": {
+            "name_process": [
+                "mmmWorker_00"
+            ],
+            "filepath_log": "config/Worker/logger.json",
+            "count_process": 1,
+            "initialize_sub_thread": [
+                "so/libsubThread.so",
+                "initialize_common_sub_thread"
+            ],
+            "sub_thread": [
+                {
+                    "sub_thread": [
+                        "so/libsubThread.so",
+                        "thread_Worker"
+                    ],
+                    "count_thread": 8,
+                    "filepath_fsm": "config/Worker/FSM.json"
+                }
+            ],
+            "main_thread": [
+                "so/libsubThread.so",
+                "main_thread_process"
+            ],
+            "return_app": [
+                "so/libsubThread.so",
+                "trace_return_app_nak"
+            ],
+            "return_so": [
+                "so/libsubThread.so",
+                "trace_return_so_nak"
+            ],
+            "timer": {
+                "period_work": 1000,
+                "count_wait_revive": 10,
+                "timeout_thread": 10000
+            },
+            "message_queue": {
+                "name": [
+                    "/mq_mmWorker_00"
+                ],
+                "maxmsg": 8,
+                "msgsize": 96
+            },
+            "shared_memory": {
+                "name_shm": [
+                    "/shm_mmWorker_00"
+                ],
+                "name_sem": [
+                    "/sem_mmWorker_00"
+                ]
+            },
+            "socket": {
+                "port": [
+                    0
+                ],
+                "backlog": 0,
+                "type_target": [
+                    "",
+                    ""
+                ]
+            },
+            "dsock_receive_fd": {
+                "path": [
+                    "",
+                    ""
+                ],
+                "backlog": 32
+            },
+            "domain_socket": {
+                "path": [
+                    "ipc/ds_mmWorker_00"
+                ],
+                "backlog": 32
+            },
+            "named_pipe": {
+                "path": [
+                    "ipc/np_mmWorker_00"
+                ]
+            }
+        }
+    },
+    "mmCmd": {
+        "message_queue": {
+            "name": [
+                "/mq_mmCmd_00"
+            ],
+            "maxmsg": 8,
+            "msgsize": 96
+        },
+        "shared_memory": {
+            "name_shm": [
+                "/shm_mmCmd_00"
+            ],
+            "name_sem": [
+                "/sem_mmCmd_00"
+            ]
+        },
+        "socket": {
+            "port": [
+                10008
+            ],
+            "backlog": 32,
+            "type_target": [
+                ""
+            ]
+        },
+        "domain_socket": {
+            "path": [
+                "ipc/ds_mmCmd_00"
+            ],
+            "backlog": 32
+        },
+        "named_pipe": {
+            "path": [
+                "ipc/np_mmCmd_00"
+            ]
+        }
+    }
+}

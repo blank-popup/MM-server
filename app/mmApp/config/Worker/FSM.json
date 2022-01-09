@@ -1,0 +1,44 @@
+{
+    "wait_message": {
+        "req_plus_one": {
+            "action": [
+                "plugin/so/libtestServerWorker.so",
+                "worker_receive_req_plus_one"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": "state_plus_one_second",
+                "NAK": "state_final"
+            }
+        }
+    },
+    "state_plus_one_second": {
+        "": {
+            "action": [
+                "plugin/so/libtestServerWorker.so",
+                "worker_receive_plus_one_second"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": "state_final",
+                "NAK": "state_final"
+            }
+        }
+    },
+    "state_final": {
+        "": {
+            "action": [
+                "plugin/so/libtestServer.so",
+                "state_final_default"
+            ],
+            "option": {
+            },
+            "next": {
+                "ACK": null,
+                "NAK": null
+            }
+        }
+    }
+}

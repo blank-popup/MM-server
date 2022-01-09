@@ -1,0 +1,66 @@
+{
+    "name_sem": "/mm?type_?##",
+    "label": "?type_?##",
+    "loggers": {
+        "root": {
+            "tag": "",
+            "level": "trace",
+            "size": 4096,
+            "active": true,
+            "propagate": false,
+            "handlers": [
+            ],
+            "loggers": {
+                "app": {
+                    "tag": "app",
+                    "level": "trace",
+                    "size": 4096,
+                    "active": true,
+                    "propagate": false,
+                    "handlers": [
+                        "consol",
+                        "file",
+                        "email"
+                    ]
+                },
+                "so": {
+                    "tag": "so",
+                    "level": "trace",
+                    "size": 4096,
+                    "active": true,
+                    "propagate": false,
+                    "handlers": [
+                        "consol",
+                        "file",
+                        "email"
+                    ]
+                }
+            }
+        }
+    },
+    "handlers": {
+        "consol": {
+            "type": "consol",
+            "level": "trace",
+            "active": true,
+            "stream": "stderr"
+        },
+        "file": {
+            "type": "file",
+            "level": "trace",
+            "active": true,
+            "path": "log/?type_?##_?yyyymmdd_?hhmmss_?uuuuuu.log",
+            "critical": "error",
+            "time_rotation": [[0, 0]],
+            "capacity_rotation": 10240000
+        },
+        "email": {
+            "type": "email",
+            "level": "fatal",
+            "active": true,
+            "receivers": [
+                "aha.mike.0018@gmail.com"
+            ]
+        }
+    }
+}
