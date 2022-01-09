@@ -35,8 +35,11 @@ MM-server's example is REST server and the function of each process is as follow
 3. Connect Ubuntu 22.04 Server
 4. Copy source to server's directory /your/path
 5. Run "CMake: Build" in Command Pallete
-6. Change directory to /your/path/run
-7. execute "mmRun"
+6. Edit /your/path/run/config/mm.json
+   1. Modify value of "mm"."directory_root" to /your/path/run
+   2. Modify value of "mm"."directory_python" to path that you installed python
+7. Change directory to /your/path/run
+8.  execute "mmRun"
 
 # Available example of REST client request
 GET http://xxx.xxx.xxx.xxx:10004 HTTP/1.1
