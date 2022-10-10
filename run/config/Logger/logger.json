@@ -59,8 +59,7 @@
             "level": "fatal",
             "active": true,
             "receivers": [
-                "aha.mike.0018@gmail.com",
-                "heehee0018@naver.com"
+                "aha.mike.0018@gmail.com"
             ]
         }
     }

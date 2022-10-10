@@ -31,6 +31,8 @@ int process_check_pid_status(pid_t _pid, const char* _name_partial)
     if (fp != NULL) {
         char name_proc[PATH_MAX] = { 0 };
         fread(name_proc, sizeof(char), PATH_MAX, fp);
+        fclose(fp);
+
         if (strstr(name_proc, _name_partial) != NULL) {
             return PROCESS_STATUS_ACITVE;
         }
