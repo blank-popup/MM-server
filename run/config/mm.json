@@ -1,6 +1,6 @@
 {
     "mm": {
-        "directory_root": "/home/nova/WorkSpace/MM-REST-server/run",
+        "directory_root": "/home/nova/WorkSpace/MM-server/run",
         "filename_main": "mmmApp",
         "directory_python": "/home/nova/miniforge3/envs/mm/bin",
         "process_logger": "Logger"

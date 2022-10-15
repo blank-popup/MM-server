@@ -651,7 +651,7 @@ void log_json_finalize()
 }
 
 
-static void log_write_process_handlers(JSON_object* _logger, struct timeval _logtime, logger_level _level, pid_t _pid, pthread_t _tid, const char* _filepath, const char* _function, int _line, const char* _message)
+static void log_write_process_handlers(JSON_object* _logger, struct timeval _logtime, logger_level _level, const char* _fulltag, pid_t _pid, pthread_t _tid, const char* _filepath, const char* _function, int _line, const char* _message)
 {
     if (_logger == NULL || _filepath == NULL || _message == NULL) {
         return;
@@ -665,16 +665,15 @@ static void log_write_process_handlers(JSON_object* _logger, struct timeval _log
             logger_write_time(logtime, _logtime);
             char loglevel[LOG_SIZE_LEVEL] = { 0, };
             logger_write_level(loglevel, _level);
-            const char* fulltag = json_object_get_string(_logger, LOG_NAME_FULLTAG);
             for (size_t ii = 0; ii < length_handlers; ++ii) {
                 logger_handler* handler = (logger_handler*)log_convert_double_to_pointer(json_array_get_real_number(array_handlers, ii));
                 if (handler->level <= _level) {
                     if (handler->type == lh_consol) {
                         if (___mm_label_logger == NULL) {
-                            fprintf(handler->u.consol.stream, "%s [%s] [%s] %s (%d:%lu) (%s:%s:%d)\n", logtime, loglevel, fulltag, _message, _pid, _tid, _filepath, _function, _line);
+                            fprintf(handler->u.consol.stream, "%s [%s] [%s] %s (%d:%lu) (%s:%s:%d)\n", logtime, loglevel, _fulltag, _message, _pid, _tid, _filepath, _function, _line);
                         }
                         else {
-                            fprintf(handler->u.consol.stream, "%s [%s] [%s] [%s] %s (%d:%lu) (%s:%s:%d)\n", logtime, loglevel, ___mm_label_logger, fulltag, _message, _pid, _tid, _filepath, _function, _line);
+                            fprintf(handler->u.consol.stream, "%s [%s] [%s] [%s] %s (%d:%lu) (%s:%s:%d)\n", logtime, loglevel, ___mm_label_logger, _fulltag, _message, _pid, _tid, _filepath, _function, _line);
                         }
                     }
                     else if (handler->type == lh_file) {
@@ -698,10 +697,10 @@ static void log_write_process_handlers(JSON_object* _logger, struct timeval _log
 
                         int size = 0;
                         if (___mm_label_logger == NULL) {
-                            size = fprintf(handler->u.file.stream, "%s [%s] [%s] %s (%d:%lu) (%s:%s:%d)\n", logtime, loglevel, fulltag, _message, _pid, _tid, _filepath, _function, _line);
+                            size = fprintf(handler->u.file.stream, "%s [%s] [%s] %s (%d:%lu) (%s:%s:%d)\n", logtime, loglevel, _fulltag, _message, _pid, _tid, _filepath, _function, _line);
                         }
                         else {
-                            size = fprintf(handler->u.file.stream, "%s [%s] [%s] [%s] %s (%d:%lu) (%s:%s:%d)\n", logtime, loglevel, ___mm_label_logger, fulltag, _message, _pid, _tid, _filepath, _function, _line);
+                            size = fprintf(handler->u.file.stream, "%s [%s] [%s] [%s] %s (%d:%lu) (%s:%s:%d)\n", logtime, loglevel, ___mm_label_logger, _fulltag, _message, _pid, _tid, _filepath, _function, _line);
                         }
                         handler->u.file.capacity_current += size;
                         if (handler->u.file.critical <= _level) {
@@ -731,7 +730,7 @@ static void log_write_process_handlers(JSON_object* _logger, struct timeval _log
                         *(content + 2) = content_loglabel;
 
                         char content_fulltag[5 + LOG_SIZE_FULLTAG + 2];
-                        log_memset_print(content_fulltag, sizeof(content_fulltag), "TAG: %s\n", fulltag);
+                        log_memset_print(content_fulltag, sizeof(content_fulltag), "TAG: %s\n", _fulltag);
                         *(content + 3) = content_fulltag;
 
                         char content_content[9 + strlen(_message) + 2];
@@ -764,7 +763,7 @@ static void log_write_process_handlers(JSON_object* _logger, struct timeval _log
         JSON_value* value_parent = json_value_get_parent(json_value_get_parent(value_logger));
         JSON_object* object_parent = json_value_get_object(value_parent);
         if (object_parent != NULL) {
-            log_write_process_handlers(object_parent, _logtime, _level, _pid, _tid, _filepath, _function, _line, _message);
+            log_write_process_handlers(object_parent, _logtime, _level, _fulltag, _pid, _tid, _filepath, _function, _line, _message);
         }
     }
 }
@@ -788,7 +787,8 @@ void log_write(JSON_object* _logger, logger_level _level, pid_t _pid, pthread_t 
     vsnprintf(message, size, _message, argp);
     va_end(argp);
 
-    log_write_process_handlers(_logger, now, _level, _pid, _tid, _filepath, _function, _line, message);
+    const char* fulltag = json_object_get_string(_logger, LOG_NAME_FULLTAG);
+    log_write_process_handlers(_logger, now, _level, fulltag, _pid, _tid, _filepath, _function, _line, message);
 
     ___mm_unlock_logger();
 }

@@ -9,6 +9,9 @@
             "active": true,
             "propagate": false,
             "handlers": [
+                "consol",
+                "file",
+                "email"
             ],
             "loggers": {
                 "app": {
@@ -16,11 +19,8 @@
                     "level": "trace",
                     "size": 4096,
                     "active": true,
-                    "propagate": false,
+                    "propagate": true,
                     "handlers": [
-                        "consol",
-                        "file",
-                        "email"
                     ]
                 },
                 "so": {
@@ -28,11 +28,8 @@
                     "level": "trace",
                     "size": 4096,
                     "active": true,
-                    "propagate": false,
+                    "propagate": true,
                     "handlers": [
-                        "consol",
-                        "file",
-                        "email"
                     ]
                 }
             }
